@@ -1,4 +1,4 @@
-package com.example.reto1_tarjetapresentacion
+package com.example.reto1tarjetapresentacion
 
 import android.content.Intent
 import android.net.Uri
@@ -30,10 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.reto1tarjetapresentacion.R
 import com.example.reto1tarjetapresentacion.ui.theme.Reto1TarjetaPresentacionTheme
-
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +38,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             // Aplicamos el tema de colores a todo lo de dentro
             Reto1TarjetaPresentacionTheme {
-                // Surface = el "lienzo" de fondeo que ocupa toda la pantalla
+                // Surface = el "lienzo" de fondo que ocupa toda la pantalla
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -49,7 +46,6 @@ class MainActivity : ComponentActivity() {
                     // Aquí llamamos a NUESTRA función, la que dibuja la tarjeta
                     TarjetaPresentacion()
                 }
-
             }
         }
     }
@@ -57,58 +53,56 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TarjetaPresentacion() {
-    // LocalContext: así un Composable "pide prestado" el conexto de Android
+    // LocalContext: así un Composable "pide prestado" el contexto de Android
     // Lo necesitamos para poder abrir el navegador desde el botón.
     val context = LocalContext.current
-    // 1. COLUMN: apila los elementos de arriba a abajo (como un flexbox vertical)
+
+    // 1. COLUMN: apila los elementos de arriba a abajo
     Column(
         modifier = Modifier
-            .fillMaxSize()          // ocupa toda la pantalla
-            .padding(16.dp),        // margen para que nada toque los bordes
-        horizontalAlignment = Alignment.CenterHorizontally,    // centra en el eje X
-        verticalArrangement = Arrangement.Center                // centra en el eje Y
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        // 2. IMAGE: la foto de perfil
-        // Requiere un archivo'foto-perfil' dentro del ras/drawable
+        // 2. IMAGE: la foto de perfil (archivo foto_perfil en res/drawable)
         Image(
             painter = painterResource(id = R.drawable.foto_perfil),
-            contentDescription = "Foto de perfil de usuario",  //para accesibilidad (lectores de
+            contentDescription = "Foto de perfil de usuario",
             modifier = Modifier
-                .size(150.dp)       //tamaño fijo: 150x150
-                .clip(CircleShape), //la recorta en forma de circulo
-            contentScale = ContentScale.Crop  // rellena el circulo sin deformar la imagen
+                .size(150.dp)
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop
         )
-        // Hueco vacio entre la imagen y el texto
+
         Spacer(modifier = Modifier.height(24.dp))
 
-        // 3.TEXT: nombre
+        // 3. TEXT: nombre
         Text(
             text = "Lucas Hernandez",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold
         )
 
-        //TEXT: rol o profesión
+        // TEXT: rol o profesión
         Text(
-            text = "Estudiante de DAM",  // cada alumno pone el suyo
+            text = "Estudiante de DAM",
             fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.secondary // color secundario del tema
+            color = MaterialTheme.colorScheme.secondary
         )
 
-        //Hueco mas grande antes del boton
         Spacer(modifier = Modifier.height(32.dp))
 
-        //4. BUTTON: enlace a Github
+        // 4. BUTTON: enlace a GitHub
         Button(
             onClick = {
-                //1. Intent ACTION_VIEW: le decimos a Android "quiero ver este recurso"
-                //      y el sistema decide que app usar (normalmente, el navegador)
-                //2. Uri.parse convierte el texto de la URL en el formato que android entiende
-                //3. startActivity lanza esa acción
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/lucas196669"))
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://github.com/lucas196669")
+                )
                 context.startActivity(intent)
             },
-            modifier = Modifier.fillMaxWidth(0.8f)       //ocupa el 80% del ancho de pantalla
+            modifier = Modifier.fillMaxWidth(0.8f)
         ) {
             Text(text = "Mi Perfil de GitHub")
         }
@@ -118,11 +112,7 @@ fun TarjetaPresentacion() {
 @Preview(showBackground = true)
 @Composable
 fun TarjetaPreview() {
-    Reto1TarjetaPresentacionTheme(){
-       TarjetaPresentacion()
-   }
+    Reto1TarjetaPresentacionTheme {
+        TarjetaPresentacion()
+    }
 }
-
-
-
-
