@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.sp
 import com.example.reto1tarjetapresentacion.R
 import com.example.reto1tarjetapresentacion.ui.theme.Reto1TarjetaPresentacionTheme
 
+
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,7 +105,7 @@ fun TarjetaPresentacion() {
                 //      y el sistema decide que app usar (normalmente, el navegador)
                 //2. Uri.parse convierte el texto de la URL en el formato que android entiende
                 //3. startActivity lanza esa acción
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Chacal231"))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/lucas196669"))
                 context.startActivity(intent)
             },
             modifier = Modifier.fillMaxWidth(0.8f)       //ocupa el 80% del ancho de pantalla
@@ -116,9 +118,9 @@ fun TarjetaPresentacion() {
 @Preview(showBackground = true)
 @Composable
 fun TarjetaPreview() {
-    Reto1TarjetaPresentacionTheme() {
-        TarjetaPresentacion()
-    }
+    Reto1TarjetaPresentacionTheme(){
+       TarjetaPresentacion()
+   }
 }
 
 
