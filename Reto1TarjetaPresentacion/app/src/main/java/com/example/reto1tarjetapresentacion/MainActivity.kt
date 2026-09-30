@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TarjetaPresentacion() {
     // LocalContext: así un Composable "pide prestado" el contexto de Android
-    // Lo necesitamos para poder abrir el navegador desde el botón.
+    // Lo necesitamos para poder abrir el navegador y el correo desde los botones.
     val context = LocalContext.current
 
     // 1. COLUMN: apila los elementos de arriba a abajo
@@ -105,6 +105,38 @@ fun TarjetaPresentacion() {
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {
             Text(text = "Mi Perfil de GitHub")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // 5. BUTTON: enlace a LinkedIn
+        Button(
+            onClick = {
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://www.linkedin.com/in/lucas-hernandez-romero-b826b343a/")
+                )
+                context.startActivity(intent)
+            },
+            modifier = Modifier.fillMaxWidth(0.8f)
+        ) {
+            Text(text = "Mi Perfil de LinkedIn")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // 6. BUTTON: enviar un correo (Gmail)
+        Button(
+            onClick = {
+                val intent = Intent(
+                    Intent.ACTION_SENDTO,
+                    Uri.parse("mailto:lucas.hernandez.romero2007@gmail.com")
+                )
+                context.startActivity(intent)
+            },
+            modifier = Modifier.fillMaxWidth(0.8f)
+        ) {
+            Text(text = "Escríbeme por Gmail")
         }
     }
 }
