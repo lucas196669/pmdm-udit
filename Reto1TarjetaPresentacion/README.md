@@ -7,7 +7,7 @@
 
 ## 📱 Qué es esta app
 
-Una tarjeta de presentación digital (estilo Linktree) que muestra una foto de perfil, un nombre, un rol profesional y tres botones de contacto: uno que enlaza al perfil de GitHub, otro al de LinkedIn y otro que abre la app de correo para escribirme.
+Una tarjeta de presentación digital (estilo Linktree) con temática informática. Muestra una foto de perfil, mi nombre, mi rol profesional y tres botones de contacto, cada uno de un color: GitHub (gris), LinkedIn (azul) y correo (rojo). El fondo es un degradado oscuro con una cuadrícula verde tipo circuito y código binario decorativo, todo dibujado con código, sin imágenes externas.
 
 > *Sustituye las capturas de abajo por las tuyas antes de entregar.*
 
@@ -21,13 +21,18 @@ Partir de un proyecto Android base y modificarlo para construir una aplicación 
 
 | Componente / concepto | Para qué se usa en esta app |
 |---|---|
+| `Box` | Apila capas una encima de otra: fondo, decoración y contenido |
 | `Column` | Organiza los elementos en vertical (foto, nombre, rol, botones) |
+| `Canvas` + `drawLine` | Dibuja la cuadrícula tipo circuito del fondo |
+| `Brush.verticalGradient` | Crea el degradado de negro a azul noche |
 | `Image` + `clip(CircleShape)` | Muestra la foto de perfil recortada en círculo |
-| `Text` | Nombre, rol profesional y texto de cada botón |
+| `Text` (con `FontFamily.Monospace`) | Nombre, rol, texto de los botones y código binario decorativo |
 | `Spacer` | Separación entre elementos y entre los botones |
-| `Button` + `Intent` (`ACTION_VIEW`) | Al pulsar, abre el navegador o la app de LinkedIn/GitHub en mi perfil |
-| `Intent` (`ACTION_SENDTO`) + `mailto:` | Al pulsar, abre la app de correo con mi dirección ya puesta como destinatario |
+| `Button` + `ButtonDefaults.buttonColors` | Botones con color de fondo (`containerColor`) y de texto (`contentColor`) propios |
+| `Intent` (`ACTION_VIEW`) + `Uri` | Abre el navegador o la app correspondiente en mi perfil de GitHub o LinkedIn |
+| `Intent` (`ACTION_SENDTO`) + `mailto:` | Abre la app de correo con mi dirección ya puesta como destinatario |
 | `LocalContext` | Permite a un Composable obtener el contexto de Android para lanzar los `Intent` |
+| `Color(0xFF...)` | Define colores personalizados en hexadecimal |
 | `res/drawable` | Carpeta donde vive la imagen de perfil |
 | `res/mipmap` (Image Asset Studio) | Icono personalizado de la app, sustituyendo al robot de Android por defecto |
 | `strings.xml` (`app_name`) | Nombre visible de la app bajo el icono, en el móvil |
@@ -46,14 +51,18 @@ Partir de un proyecto Android base y modificarlo para construir una aplicación 
 - Cómo cambiar el icono de la app con Image Asset Studio (capa de fondo y capa de primer plano).
 - Cómo cambiar el nombre visible de la app en `strings.xml`, sin tocar el nombre del proyecto.
 - Cómo lanzar una URL externa desde un botón usando `Intent` + `Uri`.
-- Cómo añadir varios botones a la misma pantalla reutilizando el mismo `context` y separándolos con `Spacer`.
 - La diferencia entre `ACTION_VIEW` (abrir un enlace) y `ACTION_SENDTO` con `mailto:` (abrir la app de correo con el destinatario relleno).
+- Cómo personalizar el color de un botón con `ButtonDefaults.buttonColors`, y cómo escribir colores en hexadecimal (`0xFF` + 6 dígitos).
+- Cómo superponer capas con `Box` para poner un fondo detrás del contenido.
+- Cómo dibujar formas directamente con `Canvas` (la cuadrícula del fondo) y cómo hacer degradados con `Brush`.
+- Que hay que adaptar los colores del texto al fondo: sobre un fondo oscuro, el texto por defecto no se leía.
 
 ## 🐞 Dificultades y cómo las resolví
 
-- **Imports en rojo al pegar código:** al pegar código sin escribirlo, Android Studio no reconocía `Column`, `Image`, etc. Lo resolví usando Alt+Enter sobre cada palabra en rojo para que el IDE añadiera el import correspondiente.
-- **Botones pegados entre sí:** al añadir el segundo botón, quedaban sin separación. Lo resolví metiendo un `Spacer` de 16 dp entre cada uno.
-- **Enlaces de ejemplo:** al principio los botones tenían valores de prueba (`TU-USUARIO`, `TU-CORREO@gmail.com`). Los sustituí por mi usuario real de LinkedIn y mi correo, y comprobé que cada botón abría lo correcto.
+- **Imports en rojo al pegar código:** al pegar código sin escribirlo, Android Studio no reconocía `Column`, `Image`, `Color`, `ButtonDefaults`, etc. Lo resolví usando Alt+Enter sobre cada palabra en rojo para que el IDE añadiera el import correspondiente.
+- **Error al cambiar el color del botón:** escribí `Color()` vacío y olvidé la coma entre `containerColor` y `contentColor`. Lo resolví dándole un valor hexadecimal al color (`Color(0xFF0A66C2)`) y separando los parámetros con comas.
+- **Botones pegados entre sí:** al añadir más botones quedaban sin separación. Lo resolví metiendo un `Spacer` de 16 dp entre cada uno.
+- **Texto que no se veía sobre el fondo oscuro:** al poner el fondo informático, los colores por defecto se perdían. Cambié el nombre a blanco, el rol a verde tipo terminal y aclaré el gris del botón de GitHub.
 - **El botón de correo no fuerza Gmail:** `mailto:` abre la app de correo predeterminada del móvil, no una concreta. Lo entendí al probarlo: si hay varias apps de correo, Android deja elegir.
 
 ## 📂 Estructura del proyecto
@@ -68,5 +77,5 @@ app/src/main/res/values/strings.xml     → nombre visible de la app
 ## 🔗 Enlaces
 
 - GitHub: [github.com/lucas196669](https://github.com/lucas196669)
-- LinkedIn: [linkedin.com/in/TU-USUARIO](https://www.linkedin.com/in/TU-USUARIO)
-- Correo: TU-CORREO@gmail.com
+- LinkedIn: [Lucas Hernandez Romero](https://www.linkedin.com/in/lucas-hernandez-romero-b826b343a/)
+- Correo: lucas.hernandez.romero2007@gmail.com
