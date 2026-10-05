@@ -1,5 +1,4 @@
-package com.example.burgershop
-
+package com.example.burguershop
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
